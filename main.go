@@ -1,3 +1,15 @@
+/*
+JWT üç bölümden oluşur:
+
+Header: belirtecin türü ve kullanılan imzalama algoritması. Belirteç türü "JWT" ​​olabilirken İmzalama Algoritması HMAC veya SHA256 olabilir. Ben HS256 kullandım.
+
+Payload: Belirtecin, talepleri içeren ikinci kısmı. Bu iddialar, uygulamaya özel verileri (ör. kullanıcı kimliği, kullanıcı adı), belirteç sona erme süresi (exp) vb. içerir.
+
+İmza: imza oluşturmak için bir header, bir payload ve sağladığınız bir anahtar kullanılır.
+*/
+
+
+
 package main
 
 import (
