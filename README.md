@@ -8,7 +8,8 @@ Tokeni çözükleme için https://jwt.io/ sitesini kullanabilirsiniz ürettiğin
 # Token Mantığı
 <img width="961" alt="Ekran Resmi 2022-03-02 03 12 39" src="https://user-images.githubusercontent.com/92402372/156270282-4eb39eb6-0be2-4a6b-b3a0-6c1abc2bc654.png">
 
-Token 3 bölümden oluşur
-Header: belirtecin türü ve kullanılan imzalama algoritması.
-Payload: Uygulamaya özel kullanıcı verileri (ör. kullanıcı kimliği, kullanıcı adı).
-İmza: imza oluşturmak için bir header, bir payload ve sağladığınız bir anahtar kullanılır.
+Token 3 bölümden oluşur. 
+Header: belirtecin türü ve kullanılan imzalama algoritması. 
+Payload: Uygulamaya özel kullanıcı verileri (ör. kullanıcı kimliği, kullanıcı adı). 
+İmza: imza oluşturmak için bir header, bir payload ve sağladığınız bir anahtar kullanılır. 
+
