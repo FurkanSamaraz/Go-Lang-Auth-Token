@@ -13,6 +13,7 @@ Payload: Belirtecin, talepleri içeren ikinci kısmı. Bu iddialar, uygulamaya �
 package main
 
 import (
+	"crypto/rand"
 	"fmt"
 	"net/http"
 
@@ -26,19 +27,28 @@ type Claims struct { //Payload
 }
 
 func getToken(w http.ResponseWriter, r *http.Request) {
-	var anahtar = []byte("furkan") //Token oluşturmak için anahtar
+	vars := mux.Vars(r)
+	id := vars["name"]
+	bytes := make([]byte, 256) //AES-256 için rastgele bir 32 bayt anahtar oluşturun.
+	if _, err := rand.Read(bytes); err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("\n")
 
 	clamis := &Claims{
+		Name:           id,
 		StandardClaims: jwt.StandardClaims{},
 	}
 
 	Token := jwt.NewWithClaims(jwt.SigningMethodHS256, clamis) //token şifreleme
-	tokenString, _ := Token.SignedString(anahtar)              //şifrelenen tokeni anahtarımıza göndererek imzalı tokeni elde etme
+	tokenString, _ := Token.SignedString(bytes)                //şifrelenen tokeni anahtarımıza göndererek imzalı tokeni elde etme
 	fmt.Fprint(w, tokenString)                                 // imzalı tokeni endpointe response etme (encoded_header + “.” + encoded_payload, “server_secret”)
+	fmt.Println(tokenString)
 }
 
 func main() {
 	mux := mux.NewRouter()
-	mux.HandleFunc("/", getToken)
+	mux.HandleFunc("/token{name}", getToken).Methods("GET")
 	http.ListenAndServe(":8080", mux)
 }
+
